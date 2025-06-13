@@ -1,48 +1,72 @@
-### LangChain chat with streaming response over FastAPI websockets
+### LangChain Chat with Streaming Response over FastAPI Websockets
 
+This project is a streaming chatbot web app using FastAPI, LangChain, and Gemini (Google Generative AI) via websockets. It features a modern frontend and supports real-time chat with LLMs.
 
+---
 
-Here are the commands to create, activate, and deactivate a Python virtual environment (venv) on macOS using zsh:
+## Features
+- Real-time chat with Gemini (Google Generative AI) or OpenAI models
+- Streaming responses over websockets
+- Modern, responsive frontend (Tailwind CSS)
+- Logging of user input and agent output
 
-```
-# Create a virtual environment named venv:
+---
+
+## Setup
+
+### 1. Clone and Prepare Environment
+```sh
+git clone <this-repo-url>
+cd langchain-chat-websockets-main
 python3 -m venv venv
-
-# Activate the virtual environment:
 source venv/bin/activate
-
-# Deactivate the virtual environment:
-deactivate
 ```
 
-Install and run like:
-
+### 2. Install Dependencies
+```sh
+pip install -r requirements.txt
 ```
-pip install -r requirements.txt # use a virtual env
-cp dotenv-example .env # add your secrets to the .env file
+
+> **Note:**
+> - `requirements.txt` does NOT update automatically when you install new packages. If you add packages with `pip install <package>`, run `pip freeze > requirements.txt` to update the file.
+
+### 3. Configure API Keys
+- Copy `.env-example` to `.env`:
+  ```sh
+  cp dotenv-example .env
+  ```
+- Add your API keys to `.env`:
+  - For Gemini: `GOOGLE_API_KEY=your_google_api_key`
+  - For OpenAI: `OPENAI_API_KEY=your_openai_api_key`
+
+---
+
+## Running the App
+
+### Locally
+```sh
 uvicorn main:app --reload
 ```
+Visit [http://localhost:8000](http://localhost:8000) in your browser.
 
-Or using docker-compose :
+### With Docker Compose
+```sh
+docker-compose up --build
+```
 
-### Run with Docker Compose
+---
 
-To run the LangChain chat application using Docker Compose, follow these steps:
+## Logging
+- User input and agent output are logged to the console at INFO level.
+- If you do not see logs, ensure you are not running the app in the background or with output redirected.
 
-1. Make sure you have [Docker](https://www.docker.com/) installed on your machine.
-2. Create a file named `.env` file
-3. Open the newly created `.env` file in a text editor and add your OpenAI API key:
+---
 
-   ```dotenv
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
+## Updating Dependencies
+- To add a new package: `pip install <package>`
+- To update requirements.txt: `pip freeze > requirements.txt`
 
-   Replace `your_openai_api_key_here` with your actual OpenAI API key.
-4. Run the following command to build the Docker image and start the FastAPI application inside a Docker container:
+---
 
-   ```bash
-   docker-compose up --build
-   ```
-5. Access the application at [http://localhost:8000](http://localhost:8000).
-
-Thanks to [@hwchase17](https://github.com/hwchase17) for showing the way in [chat-langchain](https://github.com/hwchase17/chat-langchain/tree/master)
+## Credits
+Thanks to [@hwchase17](https://github.com/hwchase17) for inspiration from [chat-langchain](https://github.com/hwchase17/chat-langchain/tree/master)
